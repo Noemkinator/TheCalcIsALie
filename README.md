@@ -1,17 +1,17 @@
-Prostredi
+Environment
 ---------
 
 Ubuntu 64bit
 Windows 64bit
 
-Autori
+Authors
 ------
 
 Nazev tymu
-- xlogin01 jmeno prijmeni 
-- xlogin02 jmeno prijmeni 
-- xlogin03 jmeno prijmeni 
-- xlogin04 jmeno prijmeni 
+- xzajic22 Jan Zajíček 
+- xsocha02 Jakub Socha 
+- xtrutn00 Veronika Trutnovská 
+- xpuchn02 Ivo Puchnar 
 
 Licence
 -------
