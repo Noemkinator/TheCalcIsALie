@@ -22,7 +22,10 @@ private slots:
     void binaryOperationClicked();
     void on_buttonDot_released();
     void on_buttonEq_released();
-    int equals();
+    void equals();
+    void updateText();
+    void makeNumbersVisible();
+    void changeNumberSystem();
 
 private:
     Ui::MainWindow *ui;

@@ -27,3 +27,8 @@
 *.exe
 *.out
 *.app
+
+# per user QT cache
+CMakeLists.txt.*
+build*
+.vscode
