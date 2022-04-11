@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(gui3 VERSION 0.1 LANGUAGES CXX)
+project(TheCalcIsALie VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -19,8 +19,8 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
-      #  calc.h
-       # calc.cpp
+        calc.h
+        calc.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
