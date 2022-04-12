@@ -9,6 +9,28 @@
 #include <iostream>
 #include <math.h>
 
+int sum(int a, int b){
+    return a+b;
+}
+
+int minus(int a, int b){
+    return a-b;
+}
+
+int multi(int a, int b){
+    return a*b;
+}
+
+int delit(int a, int b){
+    if (b){
+        return (float)a/b;
+    } else {
+        //placeholder
+        std::cout << "Error\n";
+        return 0;
+    }
+}
+
 int factorial(int num){
     if (num<0){
         //placeholder
@@ -42,11 +64,11 @@ double root(double x, double y){
 
 /*int main() for testing DELETE
 {
-    std::cout << root(2,2) << "\n";
-    std::cout << root(1,-4) << "\n";
-    std::cout << root(2,0) << "\n";
-    std::cout << root(3,-2) << "\n";
-    std::cout << root(13,1) << "\n";
-    std::cout << root(-22,4);
+    std::cout << delit(2,2) << "\n";
+    std::cout << delit(1,-4) << "\n";
+    std::cout << delit(2,0) << "\n";
+    std::cout << delit(3,-2) << "\n";
+    std::cout << delit(13,1) << "\n";
+    std::cout << delit(-22,4);
     return 0;
 }*/
