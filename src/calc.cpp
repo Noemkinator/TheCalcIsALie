@@ -1,6 +1,22 @@
-#include<iostream>
+#include "calc.h"
+#include <iostream>
 
-int main() {
-	cout << "Sample calculator source code" << endl;
-	return 0;
+double MathLib::plus(double x, double y)
+{
+    return x + y;
+}
+
+double MathLib::minus(double x, double y)
+{
+    return x - y;
+}
+
+double MathLib::multiply(double x, double y)
+{
+    return x * y;
+}
+
+double MathLib::divide(double x, double y)
+{
+    return x / y;
 }
