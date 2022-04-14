@@ -26,6 +26,7 @@ private slots:
     void updateText();
     void makeNumbersVisible();
     void changeNumberSystem();
+    void keyPressEvent(QKeyEvent * event);
 
 private:
     Ui::MainWindow *ui;

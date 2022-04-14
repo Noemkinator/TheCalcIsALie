@@ -3,6 +3,7 @@
 #include "calc.h"
 #include <QButtonGroup>
 #include <cmath>
+#include <QKeyEvent>
 
 /// variable contains current value, to be written on display
 double memory = 0;
@@ -321,4 +322,114 @@ void MainWindow::changeNumberSystem() {
     makeNumbersVisible();
     // update display
     updateText();
+}
+
+void MainWindow::keyPressEvent(QKeyEvent* event)
+{
+    switch (event->key()){
+    case Qt::Key_1:
+        emit ui->num1->released();
+        break;
+    case Qt::Key_2:
+        if(numberSystem>2){
+            emit ui->num2->released();
+        }
+        break;
+    case Qt::Key_3:
+        if(numberSystem>2){
+            emit ui->num3->released();
+        }
+        break;
+    case Qt::Key_4:
+        if(numberSystem>2){
+        emit ui->num4->released();
+        }
+        break;
+    case Qt::Key_5:
+        if(numberSystem>2){
+        emit ui->num5->released();
+        }
+        break;
+    case Qt::Key_6:if(numberSystem>2){
+        emit ui->num6->released();
+        break;
+        }
+    case Qt::Key_7:
+        if(numberSystem>2){
+        emit ui->num7->released();
+        }
+        break;
+    case Qt::Key_8:
+        if(numberSystem>8){
+        emit ui->num8->released();
+        }
+        break;
+    case Qt::Key_9:
+        if(numberSystem>8){
+        emit ui->num9->released();
+        }
+        break;
+    case Qt::Key_0:
+        emit ui->num0->released();
+        break;
+    case Qt::Key_Period:
+        emit ui->buttonDot->released();
+        break;
+    case Qt::Key_Slash:
+        emit ui->buttonDiv->released();
+        break;
+    case Qt::Key_Asterisk:
+        emit ui->buttonTimes->released();
+        break;
+    case Qt::Key_Plus:
+        emit ui->buttonPlus->released();
+        break;
+    case Qt::Key_Minus:
+        emit ui->buttonMinus->released();
+        break;
+    case Qt::Key_Exclam:
+        emit ui->buttonFac->released();
+        break;
+    case Qt::Key_Equal:
+        emit ui->buttonEq->released();
+        break;
+    case Qt::Key_Enter:
+        emit ui->buttonEq->released();
+        break;
+    case Qt::Key_Backspace:
+        emit ui->buttonCE->released();
+        break;
+    case Qt::Key_A:
+        if(numberSystem>10){
+        emit ui->numA->released();
+        }
+        break;
+    case Qt::Key_B:
+        if(numberSystem>10){
+        emit ui->numB->released();
+        }
+        break;
+    case Qt::Key_C:
+        if(numberSystem>10){
+        emit ui->numC->released();
+        }
+        break;
+    case Qt::Key_D:
+        if(numberSystem>10){
+        emit ui->numD->released();
+        }
+        break;
+    case Qt::Key_E:
+        if(numberSystem>10){
+        emit ui->numE->released();
+        }
+        break;
+    case Qt::Key_F:
+        if(numberSystem>10){
+        emit ui->numF->released();
+        }
+        break;
+
+    }
+
 }
