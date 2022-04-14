@@ -58,6 +58,9 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="styleSheet">
      <string notr="true">QPushButton {
   background-color: rgb(23, 133, 133);
@@ -82,6 +85,9 @@ QPushButton:pressed {
       <width>41</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
     </property>
     <property name="accessibleName">
      <string>9</string>
@@ -111,6 +117,9 @@ QPushButton:pressed {
       <height>31</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="styleSheet">
      <string notr="true">QPushButton {
   background-color: rgb(90,90,90);
@@ -136,6 +145,9 @@ QPushButton:pressed {
       <height>31</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="styleSheet">
      <string notr="true">QPushButton {
   background-color: rgb(23, 133, 133);
@@ -160,6 +172,9 @@ QPushButton:pressed {
       <width>41</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
     </property>
     <property name="accessibleName">
      <string>6</string>
@@ -189,6 +204,9 @@ QPushButton:pressed {
       <height>31</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="styleSheet">
      <string notr="true">QPushButton {
   background-color: rgb(23, 133, 133);
@@ -213,6 +231,9 @@ QPushButton:pressed {
       <width>41</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
     </property>
     <property name="accessibleName">
      <string>5</string>
@@ -242,6 +263,9 @@ QPushButton:pressed {
       <height>31</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="styleSheet">
      <string notr="true">QPushButton {
   background-color: rgb(23, 133, 133);
@@ -267,6 +291,9 @@ QPushButton:pressed {
       <height>31</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="styleSheet">
      <string notr="true">QPushButton {
   background-color: rgb(23, 133, 133);
@@ -291,6 +318,9 @@ QPushButton:pressed {
       <width>41</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
     </property>
     <property name="accessibleName">
      <string>2</string>
@@ -320,6 +350,9 @@ QPushButton:pressed {
       <height>31</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="accessibleName">
      <string>7</string>
     </property>
@@ -348,6 +381,9 @@ QPushButton:pressed {
       <height>31</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="styleSheet">
      <string notr="true">QPushButton {
   background-color: rgb(23, 71, 71);
@@ -373,6 +409,9 @@ QPushButton:pressed {
       <height>31</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="styleSheet">
      <string notr="true">QPushButton {
   background-color: rgb(23, 133, 133);
@@ -397,6 +436,9 @@ QPushButton:pressed {
       <width>41</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
     </property>
     <property name="accessibleName">
      <string>4</string>
@@ -426,6 +468,9 @@ QPushButton:pressed {
       <height>31</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="styleSheet">
      <string notr="true">QPushButton {
   background-color: rgb(90,90,90);
@@ -450,6 +495,9 @@ QPushButton:pressed {
       <width>41</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
     </property>
     <property name="accessibleName">
      <string>1</string>
@@ -480,6 +528,9 @@ QPushButton:pressed {
       <height>31</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="accessibleName">
      <string>3</string>
     </property>
@@ -508,6 +559,9 @@ QPushButton:pressed {
       <height>31</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="accessibleName">
      <string>8</string>
     </property>
@@ -535,6 +589,9 @@ QPushButton:pressed {
       <width>41</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
     </property>
     <property name="styleSheet">
      <string notr="true">QPushButton {
@@ -567,6 +624,9 @@ QPushButton:pressed {
       <verstretch>0</verstretch>
      </sizepolicy>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="styleSheet">
      <string notr="true">QPushButton {
   background-color: rgb(23, 133, 133);
@@ -591,6 +651,9 @@ QPushButton:pressed {
       <width>41</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
     </property>
     <property name="styleSheet">
      <string notr="true">QPushButton {
@@ -617,6 +680,9 @@ QPushButton:pressed {
       <height>31</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="styleSheet">
      <string notr="true">QPushButton {
   background-color: rgb(23, 133, 133);
@@ -641,6 +707,9 @@ QPushButton:pressed {
       <width>41</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
     </property>
     <property name="styleSheet">
      <string notr="true">QPushButton {
@@ -667,6 +736,9 @@ QPushButton:pressed {
       <height>31</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="styleSheet">
      <string notr="true">QPushButton {
   background-color: rgb(23, 133, 133);
@@ -691,6 +763,9 @@ QPushButton:pressed {
       <width>41</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
     </property>
     <property name="styleSheet">
      <string notr="true">QPushButton {
@@ -747,6 +822,9 @@ QPushButton:pressed {
       <height>31</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="accessibleName">
      <string>10</string>
     </property>
@@ -774,6 +852,9 @@ QPushButton:pressed {
       <width>41</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
     </property>
     <property name="accessibleName">
      <string>14</string>
@@ -803,6 +884,9 @@ QPushButton:pressed {
       <height>31</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="accessibleName">
      <string>12</string>
     </property>
@@ -831,6 +915,9 @@ QPushButton:pressed {
       <height>31</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="accessibleName">
      <string>15</string>
     </property>
@@ -858,6 +945,9 @@ QPushButton:pressed {
       <width>41</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
     </property>
     <property name="accessibleName">
      <string>13</string>
@@ -888,6 +978,9 @@ QPushButton:pressed {
       <height>31</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="accessibleName">
      <string>11</string>
     </property>
@@ -914,7 +1007,7 @@ QPushButton:pressed {
      <x>0</x>
      <y>0</y>
      <width>202</width>
-     <height>19</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuHelp">
