@@ -4,6 +4,7 @@
 #include <QButtonGroup>
 #include <cmath>
 #include <QKeyEvent>
+#include <QtMath>
 
 /// variable contains current value, to be written on display
 double memory = 0;
@@ -12,16 +13,15 @@ int numberSystem = 10;
 /// groups containing selected buttons, for easier manipulation and iteration
 QButtonGroup *numberButtons, *numberSystems;
 
-double firstNum; //prvni cislo binarni operace
-int newNum=0; //po stisknuti dalsi cislice vynulovat display
+double firstNum; // prvni cislo binarni operace
+int newNum = 0;  // po stisknuti dalsi cislice vynulovat display
 /// represents the current exponent of a float digit
-int dot=0;
-int myOperator = 0; //pamatuje ktery operator pouzit
-//0=nic, 1=+, 2=-, 3=*, 4=/, 5=exp, 6=root
+int dot = 0;
+int myOperator = 0; // pamatuje ktery operator pouzit
+// 0=nic, 1=+, 2=-, 3=*, 4=/, 5=exp, 6=root
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+    : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     // prevent window resizing
@@ -53,35 +53,35 @@ MainWindow::MainWindow(QWidget *parent)
     numberSystems->addButton(ui->buttonTo10, 10);
     numberSystems->addButton(ui->buttonTo16, 16);
 
-    //prirazeni funkci pri stisknuti tlacitek
-    connect(ui->num0,SIGNAL(released()),this,SLOT(numClicked()));
-    connect(ui->num1,SIGNAL(released()),this,SLOT(numClicked()));
-    connect(ui->num2,SIGNAL(released()),this,SLOT(numClicked()));
-    connect(ui->num3,SIGNAL(released()),this,SLOT(numClicked()));
-    connect(ui->num4,SIGNAL(released()),this,SLOT(numClicked()));
-    connect(ui->num5,SIGNAL(released()),this,SLOT(numClicked()));
-    connect(ui->num6,SIGNAL(released()),this,SLOT(numClicked()));
-    connect(ui->num7,SIGNAL(released()),this,SLOT(numClicked()));
-    connect(ui->num8,SIGNAL(released()),this,SLOT(numClicked()));
-    connect(ui->num9,SIGNAL(released()),this,SLOT(numClicked()));
-    connect(ui->numA,SIGNAL(released()),this,SLOT(numClicked()));
-    connect(ui->numB,SIGNAL(released()),this,SLOT(numClicked()));
-    connect(ui->numC,SIGNAL(released()),this,SLOT(numClicked()));
-    connect(ui->numD,SIGNAL(released()),this,SLOT(numClicked()));
-    connect(ui->numE,SIGNAL(released()),this,SLOT(numClicked()));
-    connect(ui->numF,SIGNAL(released()),this,SLOT(numClicked()));
-    connect(ui->buttonSign,SIGNAL(released()),this,SLOT(unaryOperationClicked()));
-    connect(ui->buttonFac,SIGNAL(released()),this,SLOT(unaryOperationClicked()));
-    connect(ui->buttonPlus,SIGNAL(released()),this,SLOT(binaryOperationClicked()));
-    connect(ui->buttonMinus,SIGNAL(released()),this,SLOT(binaryOperationClicked()));
-    connect(ui->buttonTimes,SIGNAL(released()),this,SLOT(binaryOperationClicked()));
-    connect(ui->buttonDiv,SIGNAL(released()),this,SLOT(binaryOperationClicked()));
-    connect(ui->buttonExp,SIGNAL(released()),this,SLOT(binaryOperationClicked()));
-    connect(ui->buttonRoot,SIGNAL(released()),this,SLOT(binaryOperationClicked()));
-    connect(ui->buttonTo2,SIGNAL(released()),this,SLOT(changeNumberSystem()));
-    connect(ui->buttonTo8,SIGNAL(released()),this,SLOT(changeNumberSystem()));
-    connect(ui->buttonTo10,SIGNAL(released()),this,SLOT(changeNumberSystem()));
-    connect(ui->buttonTo16,SIGNAL(released()),this,SLOT(changeNumberSystem()));
+    // prirazeni funkci pri stisknuti tlacitek
+    connect(ui->num0, SIGNAL(released()), this, SLOT(numClicked()));
+    connect(ui->num1, SIGNAL(released()), this, SLOT(numClicked()));
+    connect(ui->num2, SIGNAL(released()), this, SLOT(numClicked()));
+    connect(ui->num3, SIGNAL(released()), this, SLOT(numClicked()));
+    connect(ui->num4, SIGNAL(released()), this, SLOT(numClicked()));
+    connect(ui->num5, SIGNAL(released()), this, SLOT(numClicked()));
+    connect(ui->num6, SIGNAL(released()), this, SLOT(numClicked()));
+    connect(ui->num7, SIGNAL(released()), this, SLOT(numClicked()));
+    connect(ui->num8, SIGNAL(released()), this, SLOT(numClicked()));
+    connect(ui->num9, SIGNAL(released()), this, SLOT(numClicked()));
+    connect(ui->numA, SIGNAL(released()), this, SLOT(numClicked()));
+    connect(ui->numB, SIGNAL(released()), this, SLOT(numClicked()));
+    connect(ui->numC, SIGNAL(released()), this, SLOT(numClicked()));
+    connect(ui->numD, SIGNAL(released()), this, SLOT(numClicked()));
+    connect(ui->numE, SIGNAL(released()), this, SLOT(numClicked()));
+    connect(ui->numF, SIGNAL(released()), this, SLOT(numClicked()));
+    connect(ui->buttonSign, SIGNAL(released()), this, SLOT(unaryOperationClicked()));
+    connect(ui->buttonFac, SIGNAL(released()), this, SLOT(unaryOperationClicked()));
+    connect(ui->buttonPlus, SIGNAL(released()), this, SLOT(binaryOperationClicked()));
+    connect(ui->buttonMinus, SIGNAL(released()), this, SLOT(binaryOperationClicked()));
+    connect(ui->buttonTimes, SIGNAL(released()), this, SLOT(binaryOperationClicked()));
+    connect(ui->buttonDiv, SIGNAL(released()), this, SLOT(binaryOperationClicked()));
+    connect(ui->buttonExp, SIGNAL(released()), this, SLOT(binaryOperationClicked()));
+    connect(ui->buttonRoot, SIGNAL(released()), this, SLOT(binaryOperationClicked()));
+    connect(ui->buttonTo2, SIGNAL(released()), this, SLOT(changeNumberSystem()));
+    connect(ui->buttonTo8, SIGNAL(released()), this, SLOT(changeNumberSystem()));
+    connect(ui->buttonTo10, SIGNAL(released()), this, SLOT(changeNumberSystem()));
+    connect(ui->buttonTo16, SIGNAL(released()), this, SLOT(changeNumberSystem()));
 }
 
 MainWindow::~MainWindow()
@@ -109,18 +109,22 @@ void MainWindow::on_buttonCE_clicked()
  */
 void MainWindow::numClicked()
 {
-    if (newNum==1){
+    if (newNum == 1) {
         MainWindow::on_buttonCE_clicked();
     }
-    QPushButton * button = (QPushButton*)sender();
+    QPushButton *button = (QPushButton *)sender();
 
     if (dot == 0)
-        memory = memory*numberSystem + numberButtons->id(button);
+        memory = memory * numberSystem + numberButtons->id(button);
     else {
-        memory += numberButtons->id(button) * pow(numberSystem,(-dot));
+        memory += numberButtons->id(button) * pow(numberSystem, (-dot));
         dot++;
+        // add a zero to the end of the decimal part, do not call updateText()
+        if (numberButtons->id(button) == 0) {
+            ui->display->setText(ui->display->text() + "0");
+            return;
+        }
     }
-
 
     updateText();
 }
@@ -131,10 +135,10 @@ void MainWindow::numClicked()
  */
 void MainWindow::on_buttonDot_released()
 {
-    if (dot==0){
+    if (dot == 0) {
         ui->display->setText(ui->display->text() + ".");
     }
-    dot=1;
+    dot = 1;
 }
 
 /**
@@ -143,16 +147,13 @@ void MainWindow::on_buttonDot_released()
  */
 void MainWindow::unaryOperationClicked()
 {
-    QPushButton * button = (QPushButton*)sender();
-    if (button->text()=="+/-")
-    {
-        //vynasob -1 a vypis na display
-        memory*=-1;
+    QPushButton *button = (QPushButton *)sender();
+    if (button->text() == "+/-") {
+        // vynasob -1 a vypis na display
+        memory *= -1;
         updateText();
-    }
-    else if (button->text()=="x!")
-    {
-        //TODO zavolej fci faktorial
+    } else if (button->text() == "x!") {
+        // TODO zavolej fci faktorial
         updateText();
     }
 }
@@ -164,36 +165,29 @@ void MainWindow::unaryOperationClicked()
  */
 void MainWindow::binaryOperationClicked()
 {
-    QPushButton * button = (QPushButton*)sender();
-    //podivej, jestli je tohle prvni stisk tlacitka operace popr. vyhodnot jiz zadanou operaci
-    if (myOperator!=0){
+    QPushButton *button = (QPushButton *)sender();
+    // podivej, jestli je tohle prvni stisk tlacitka operace popr. vyhodnot jiz zadanou operaci
+    if (myOperator != 0) {
         MainWindow::equals();
     }
-    firstNum=memory;
-    //zapamatuj operator pro priste
-    //bohuzel case funguje jen s cisly
-    if(button->text()=="+"){
-        myOperator=1;
+    firstNum = memory;
+    // zapamatuj operator pro priste
+    // bohuzel case funguje jen s cisly
+    if (button->text() == "+") {
+        myOperator = 1;
+    } else if (button->text() == "-") {
+        myOperator = 2;
+    } else if (button->text() == "*") {
+        myOperator = 3;
+    } else if (button->text() == "/") {
+        myOperator = 4;
+    } else if (button->objectName() == "buttonExp") {
+        myOperator = 5;
+    } else if (button->objectName() == "buttonSqrt") {
+        myOperator = 6;
     }
-    else if(button->text()=="-"){
-        myOperator=2;
-    }
-    else if(button->text()=="*"){
-        myOperator=3;
-    }
-    else if(button->text()=="/"){
-        myOperator=4;
-    }
-    else if(button->objectName()=="buttonExp")
-    {
-        myOperator=5;
-    }
-    else if(button->objectName()=="buttonSqrt")
-    {
-        myOperator=6;
-    }
-    //pripravit na nove cislo
-    newNum=1;
+    // pripravit na nove cislo
+    newNum = 1;
 }
 
 /**
@@ -204,8 +198,8 @@ void MainWindow::binaryOperationClicked()
 void MainWindow::on_buttonEq_released()
 {
     MainWindow::equals();
-    firstNum=0;
-    myOperator=0;
+    firstNum = 0;
+    myOperator = 0;
 }
 
 /**
@@ -218,66 +212,69 @@ void MainWindow::equals()
     double displayNum;
     QString displayText;
 
-    //vyber operace na vykonani
-    switch (myOperator){
+    // vyber operace na vykonani
+    switch (myOperator) {
     case 0:
         break;
     case 1:
-        memory=MathLib::plus(firstNum, memory);
+        memory = MathLib::plus(firstNum, memory);
         break;
     case 2:
-        memory=MathLib::minus(firstNum, memory);
+        memory = MathLib::minus(firstNum, memory);
         break;
     case 3:
-        memory=MathLib::multiply(firstNum, memory);
+        memory = MathLib::multiply(firstNum, memory);
         break;
     case 4:
-        memory=MathLib::divide(firstNum, memory);
+        memory = MathLib::divide(firstNum, memory);
         break;
     case 5:
-        firstNum+=ui->display->text().toDouble();//<-- to be replaced
+        firstNum += ui->display->text().toDouble(); //<-- to be replaced
         displayText = QString::number(firstNum, 'g', 15);
         ui->display->setText(displayText);
         break;
     case 6:
-        firstNum-=ui->display->text().toDouble();//<-- to be replaced
+        firstNum -= ui->display->text().toDouble(); //<-- to be replaced
         displayText = QString::number(firstNum, 'g', 15);
         ui->display->setText(displayText);
         break;
     }
     updateText();
-    //pripravit na nove cislo
-    newNum=1;
+    // pripravit na nove cislo
+    newNum = 1;
 }
 
 /**
  * @brief MainWindow::updateText
  * Function updates the display according to the selected number system.
  */
-void MainWindow::updateText() {
+void MainWindow::updateText()
+{
     // variables store the integer and fraction part of the memory
     double intPart = 0, fractPart = 0;
     // define the selected precision digits
     int fractPrecision = 15;
+    // separate the memory into integer part and fraction part
+    fractPart = std::modf(memory, &intPart);
+    fractPart = std::abs(fractPart);
 
-    if (numberSystem == 10)
+    if (numberSystem == 10) {
         ui->display->setText(QString::number(memory, 'g', fractPrecision));
-    else {
-        // separate the memory into integer part and fraction part
-        fractPart = std::modf(memory, &intPart);
+    } else {
         // cast to long to truncate the decimal part
         ui->display->setText(QString::number((long)intPart, numberSystem).toUpper());
-    }
-    // if fraction part is large then selected precision
-    if ((long)(fractPart * pow(10, fractPrecision)) > 0){
-        // add dot character
-        ui->display->setText(ui->display->text() + "." );
-        // calculate the fraction digits and write them to display
-        for (int i = 0; i < fractPrecision; ++i) {
-            fractPart *= numberSystem;
-            ui->display->setText(ui->display->text() + QString::number((long)fractPart, numberSystem).toUpper());
-            fractPart -= (long)fractPart;
-
+        // if fraction part is larger then selected precision
+        if ((fractPart * qPow(numberSystem, fractPrecision)) >= 1) {
+            // add dot character
+            ui->display->setText(ui->display->text() + ".");
+            // calculate the fraction digits and write them to display
+            for (int i = 0; i < fractPrecision; ++i) {
+                fractPart *= numberSystem;
+                ui->display->setText(ui->display->text() + QString::number((long)fractPart, numberSystem).toUpper());
+                fractPart -= (long)fractPart;
+                if (fractPart <= std::numeric_limits<double>::epsilon())
+                    break;
+            }
         }
     }
 }
@@ -286,8 +283,9 @@ void MainWindow::updateText() {
  * @brief MainWindow::makeNumbersVisible
  * Function disables/enables number buttons according to the selected number system.
  */
-void MainWindow::makeNumbersVisible() {
-    for (auto button: numberButtons->buttons()) {
+void MainWindow::makeNumbersVisible()
+{
+    for (auto button : numberButtons->buttons()) {
         if (numberButtons->id(button) >= numberSystem)
             button->setVisible(false);
         else
@@ -299,13 +297,14 @@ void MainWindow::makeNumbersVisible() {
  * @brief MainWindow::changeNumberSystem
  * When the conversion button has been pressed, changes the current number system and rewrites the display.
  */
-void MainWindow::changeNumberSystem() {
-    QPushButton * button = (QPushButton*)sender();
+void MainWindow::changeNumberSystem()
+{
+    QPushButton *button = (QPushButton *)sender();
     // change the current number system
     numberSystem = numberSystems->id(button);
 
     // set the respective button text to indidate selection
-    for (auto button: numberSystems->buttons()) {
+    for (auto button : numberSystems->buttons()) {
         if (numberSystems->id(button) == numberSystem)
             button->setText("(.)" + QString::number(numberSystems->id(button)));
         else
