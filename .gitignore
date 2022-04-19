@@ -33,3 +33,4 @@ CMakeLists.txt.*
 build*
 .vscode
 TheCalcIsALie
+profiling

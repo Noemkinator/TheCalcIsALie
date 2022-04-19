@@ -1,19 +1,20 @@
 CXX=g++
 CPPFLAGS=-g -O2
 CALCSOURCES=$(wildcard *.cpp *.h *.ui)
+BIN = TheCalcIsALie profiling
 .PHONY: pack run clean
 
 %.o: %.cpp %.h
 	$(CXX) -c $(CPPFLAGS) $< -o $@
 
-all: TheCalcIsALie profile
+all: $(BIN)
 
 TheCalcIsALie: $(CALCSOURCES)
 	cmake -S . -B build
 	cd build && make
 	cp ./build/TheCalcIsALie ./
 
-profile: profiling.o calc.o
+profiling: profiling.o calc.o
 	$(CXX) $(CPPFLAGS) -o $@ $^
 
 pack:
@@ -23,7 +24,7 @@ run: TheCalcIsALie
 	./TheCalcIsALie
 
 clean:
-	rm -rf *.o ./build ./TheCalcIsALie ./test/build ./calc_tests
+	rm -rf *.o ./build ./test/build ./calc_tests $(BIN)
 
 calc_tests: tdd_tests.cpp calc.cpp
 	cmake -S test -B test/build

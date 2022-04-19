@@ -103,6 +103,7 @@ void MainWindow::clear()
     newNum = 0;
     dot = 0;
     memory = 0;
+    myOperator = 0;
     updateText();
 }
 
@@ -113,7 +114,10 @@ void MainWindow::clear()
 void MainWindow::numClicked()
 {
     if (newNum == 1) {
-        MainWindow::clear();
+        newNum = 0;
+        dot = 0;
+        memory = 0;
+        updateText();
     }
     QPushButton *button = (QPushButton *)sender();
 
@@ -155,7 +159,7 @@ void MainWindow::unaryOperationClicked()
         // vynasob -1 a vypis na display
         memory *= -1;
     } else if (button->text() == "x!") {
-        // TODO zavolej fci faktorial
+        memory = MathLib::factorial((long)memory);
     }
     updateText();
 }
@@ -219,16 +223,22 @@ void MainWindow::equals()
     case 0:
         break;
     case 1:
-        memory = MathLib::plus(firstNum, memory);
+        memory = MathLib::sum(firstNum, memory);
         break;
     case 2:
         memory = MathLib::minus(firstNum, memory);
         break;
     case 3:
-        memory = MathLib::multiply(firstNum, memory);
+        memory = MathLib::multi(firstNum, memory);
         break;
     case 4:
-        memory = MathLib::divide(firstNum, memory);
+        try {
+            memory = MathLib::delit(firstNum, memory);
+        } catch (const char* msg) {
+            clear();
+            ui->display->setText(msg);
+            return;
+        }
         break;
     case 5:
         firstNum += ui->display->text().toDouble(); //<-- to be replaced
