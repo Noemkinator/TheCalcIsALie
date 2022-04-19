@@ -16,12 +16,12 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_buttonCE_clicked();
+    void clear();
     void numClicked();
     void unaryOperationClicked();
     void binaryOperationClicked();
-    void on_buttonDot_released();
-    void on_buttonEq_released();
+    void dotClicked();
+    void equalClicked();
     void equals();
     void updateText();
     void makeNumbersVisible();
