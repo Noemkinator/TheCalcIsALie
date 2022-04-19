@@ -2,9 +2,9 @@
 #include "./ui_mainwindow.h"
 #include "calc.h"
 #include <QButtonGroup>
-#include <cmath>
 #include <QKeyEvent>
 #include <QtMath>
+#include <cmath>
 
 /// variable contains current value, to be written on display
 double memory = 0;
@@ -82,6 +82,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->buttonTo8, SIGNAL(released()), this, SLOT(changeNumberSystem()));
     connect(ui->buttonTo10, SIGNAL(released()), this, SLOT(changeNumberSystem()));
     connect(ui->buttonTo16, SIGNAL(released()), this, SLOT(changeNumberSystem()));
+    connect(ui->buttonDot, SIGNAL(released()), this, SLOT(dotClicked()));
+    connect(ui->buttonCE, SIGNAL(released()), this, SLOT(clear()));
+    connect(ui->buttonEq, SIGNAL(released()), this, SLOT(equalClicked()));
 }
 
 MainWindow::~MainWindow()
@@ -92,10 +95,10 @@ MainWindow::~MainWindow()
 }
 
 /**
- * @brief MainWindow::on_buttonCE_clicked
+ * @brief MainWindow::clear
  * Clear the memory and rewrite the display.
  */
-void MainWindow::on_buttonCE_clicked()
+void MainWindow::clear()
 {
     newNum = 0;
     dot = 0;
@@ -110,7 +113,7 @@ void MainWindow::on_buttonCE_clicked()
 void MainWindow::numClicked()
 {
     if (newNum == 1) {
-        MainWindow::on_buttonCE_clicked();
+        MainWindow::clear();
     }
     QPushButton *button = (QPushButton *)sender();
 
@@ -130,10 +133,10 @@ void MainWindow::numClicked()
 }
 
 /**
- * @brief MainWindow::on_buttonDot_released
+ * @brief MainWindow::dotClicked
  * Sets the decimal point and starts to accept fractions.
  */
-void MainWindow::on_buttonDot_released()
+void MainWindow::dotClicked()
 {
     if (dot == 0) {
         ui->display->setText(ui->display->text() + ".");
@@ -151,11 +154,10 @@ void MainWindow::unaryOperationClicked()
     if (button->text() == "+/-") {
         // vynasob -1 a vypis na display
         memory *= -1;
-        updateText();
     } else if (button->text() == "x!") {
         // TODO zavolej fci faktorial
-        updateText();
     }
+    updateText();
 }
 
 /**
@@ -191,11 +193,11 @@ void MainWindow::binaryOperationClicked()
 }
 
 /**
- * @brief MainWindow::on_buttonEq_released
+ * @brief MainWindow::equalClicked
  * The equal button is pressed.
  * Calls the equals() function and resets the selected operator and first number memory.
  */
-void MainWindow::on_buttonEq_released()
+void MainWindow::equalClicked()
 {
     MainWindow::equals();
     firstNum = 0;
@@ -261,7 +263,7 @@ void MainWindow::updateText()
     if (numberSystem == 10) {
         ui->display->setText(QString::number(memory, 'g', fractPrecision));
     } else {
-        // cast to long to truncate the decimal part
+        // cast to long to select the correct function
         ui->display->setText(QString::number((long)intPart, numberSystem).toUpper());
         // if fraction part is larger then selected precision
         if ((fractPart * qPow(numberSystem, fractPrecision)) >= 1) {
@@ -323,49 +325,55 @@ void MainWindow::changeNumberSystem()
     updateText();
 }
 
-void MainWindow::keyPressEvent(QKeyEvent* event)
+/**
+ * @brief Function parses incoming keyboard events and sends signals to the appropriate buttons.
+ *
+ * @param event Incoming keyboard event.
+ */
+void MainWindow::keyPressEvent(QKeyEvent *event)
 {
-    switch (event->key()){
+    switch (event->key()) {
     case Qt::Key_1:
         emit ui->num1->released();
         break;
     case Qt::Key_2:
-        if(numberSystem>2){
+        if (numberSystem > 2) {
             emit ui->num2->released();
         }
         break;
     case Qt::Key_3:
-        if(numberSystem>2){
+        if (numberSystem > 3) {
             emit ui->num3->released();
         }
         break;
     case Qt::Key_4:
-        if(numberSystem>2){
-        emit ui->num4->released();
+        if (numberSystem > 4) {
+            emit ui->num4->released();
         }
         break;
     case Qt::Key_5:
-        if(numberSystem>2){
-        emit ui->num5->released();
+        if (numberSystem > 5) {
+            emit ui->num5->released();
         }
         break;
-    case Qt::Key_6:if(numberSystem>2){
-        emit ui->num6->released();
-        break;
+    case Qt::Key_6:
+        if (numberSystem > 6) {
+            emit ui->num6->released();
         }
+        break;
     case Qt::Key_7:
-        if(numberSystem>2){
-        emit ui->num7->released();
+        if (numberSystem > 7) {
+            emit ui->num7->released();
         }
         break;
     case Qt::Key_8:
-        if(numberSystem>8){
-        emit ui->num8->released();
+        if (numberSystem > 8) {
+            emit ui->num8->released();
         }
         break;
     case Qt::Key_9:
-        if(numberSystem>8){
-        emit ui->num9->released();
+        if (numberSystem > 9) {
+            emit ui->num9->released();
         }
         break;
     case Qt::Key_0:
@@ -389,46 +397,50 @@ void MainWindow::keyPressEvent(QKeyEvent* event)
     case Qt::Key_Exclam:
         emit ui->buttonFac->released();
         break;
+    case Qt::Key_Return:
+        emit ui->buttonEq->released();
+        break;
     case Qt::Key_Equal:
         emit ui->buttonEq->released();
         break;
     case Qt::Key_Enter:
         emit ui->buttonEq->released();
         break;
+    case Qt::Key_Delete:
+        emit ui->buttonCE->released();
+        break;
     case Qt::Key_Backspace:
         emit ui->buttonCE->released();
         break;
     case Qt::Key_A:
-        if(numberSystem>10){
-        emit ui->numA->released();
+        if (numberSystem > 10) {
+            emit ui->numA->released();
         }
         break;
     case Qt::Key_B:
-        if(numberSystem>10){
-        emit ui->numB->released();
+        if (numberSystem > 11) {
+            emit ui->numB->released();
         }
         break;
     case Qt::Key_C:
-        if(numberSystem>10){
-        emit ui->numC->released();
+        if (numberSystem > 12) {
+            emit ui->numC->released();
         }
         break;
     case Qt::Key_D:
-        if(numberSystem>10){
-        emit ui->numD->released();
+        if (numberSystem > 13) {
+            emit ui->numD->released();
         }
         break;
     case Qt::Key_E:
-        if(numberSystem>10){
-        emit ui->numE->released();
+        if (numberSystem > 14) {
+            emit ui->numE->released();
         }
         break;
     case Qt::Key_F:
-        if(numberSystem>10){
-        emit ui->numF->released();
+        if (numberSystem > 15) {
+            emit ui->numF->released();
         }
         break;
-
     }
-
 }
