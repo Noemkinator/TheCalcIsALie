@@ -1,5 +1,5 @@
 /**
- * @file complx_funcs.cpp
+ * @file calc.cpp
  * @brief this file contains addition, subtraction,
  * division, multiplication, factorial,
  * power and root functions.

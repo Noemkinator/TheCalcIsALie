@@ -31,6 +31,7 @@
 # per user QT cache
 CMakeLists.txt.*
 build*
+bin
 .vscode
-TheCalcIsALie
-profiling
+docs
+*.zip
