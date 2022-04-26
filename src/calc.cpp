@@ -94,6 +94,10 @@ long MathLib::factorial(long num)
  * param y Exponent
  * date 4/28/2022
  */
+double MathLib::pow(double x, double y) 
+{
+    return std::pow(x,y);
+}
 
 /**
  * This function makes nth root of given

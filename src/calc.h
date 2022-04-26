@@ -8,7 +8,7 @@ namespace MathLib {
     double delit(double a, double b);
 
     long factorial(long num);
-    // double pow(double x, double y); from library math.h
+    double pow(double x, double y);
     double root(double x, double y);
 } // namespace MathLib
 

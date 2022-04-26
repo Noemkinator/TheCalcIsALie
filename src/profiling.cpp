@@ -5,7 +5,8 @@
  * @date 4/28/2022
  */
 #include <iostream>
-#include "calc.cpp"
+#include "calc.h"
+#include <cmath>
 typedef long double ld;
 
 ld average(ld *x,ld N){
@@ -25,7 +26,7 @@ int main(int argc,char *argv[]){
 	ld avg=average((ld*)x,N);
 	ld summ=0;
 	for(long i=0;i<N;i++){
-		summ=MathLib::sum(pow(MathLib::minus(x[i],avg),2),summ);
+		summ=MathLib::sum(MathLib::pow(MathLib::minus(x[i],avg),2),summ);
 	}
 	ld s = MathLib::multi(MathLib::delit(1,N-1),summ);
 	ld stddev= MathLib::root(s,2);
