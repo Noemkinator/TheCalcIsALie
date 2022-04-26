@@ -1,7 +1,8 @@
+# Makefile needs to be run within a Qt MinGW shell to correctly set the PATH enviromental variable
 CXX=g++
 CPPFLAGS=-g -O2
 CALCSOURCES=$(wildcard *.cpp *.h *.ui)
-BIN = TheCalcIsALie profiling
+BIN = bin\TheCalcIsALie.exe stddev.exe
 .PHONY: pack run clean
 
 %.o: %.cpp %.h
@@ -9,30 +10,39 @@ BIN = TheCalcIsALie profiling
 
 all: $(BIN)
 
-TheCalcIsALie: $(CALCSOURCES)
-	cmake -S . -B build
+bin\TheCalcIsALie.exe: $(CALCSOURCES)
+	cmake -G "Unix Makefiles" -S . -B build
 	cd build && make
-	cp ./build/TheCalcIsALie ./
+	if not exist "bin" mkdir bin
+	move build\TheCalcIsALie.exe .\bin\TheCalcIsALie.exe
+	windeployqt .\bin\TheCalcIsALie.exe
 
-profiling: profiling.o calc.o
+stddev.exe: profiling.o calc.o
 	$(CXX) $(CPPFLAGS) -o $@ $^
 
-pack:
-	zip xzajic22_xsocha02_xtrutn00_xpuchn02.zip *.cpp *.h *.ui CMakeLists.txt Makefile Doxyfile
+pack: xzajic22_xsocha02_xtrutn00_xpuchn02.zip
 
-run: TheCalcIsALie
-	./TheCalcIsALie
+xzajic22_xsocha02_xtrutn00_xpuchn02.zip:
+	zip -j $@ *.cpp *.h *.ui CMakeLists.txt Makefile Doxyfile ..\hodnoceni.txt ..\dokumentace.pdf ..\odevzdani.txt
+	zip $@ test\CMakeLists.txt
+
+run: bin\TheCalcIsALie.exe
+	$<
 
 clean:
-	rm -rf *.o ./build ./test/build ./calc_tests $(BIN)
+	del /s /q *.o calc_tests.exe $(BIN)
+	if exist "build" rd /s /q "build"
+	if exist "bin" rd /s /q "bin"
+	if exist "test\build" rd /s /q "test\build"
 
-calc_tests: tdd_tests.cpp calc.cpp
-	cmake -S test -B test/build
+calc_tests.exe:
+	cmake -G "Unix Makefiles" -S test -B test\build
 	cd test/build && make
-	cp ./test/calc_tests ./
+	move .\test\calc_tests.exe .
 
-test: calc_tests
-	./calc_tests
+test: calc_tests.exe
+	$<
 
+# may not work on Windows based systems - Doxygen needs to be installed
 doc:
-	doxygen ./Doxyfile
+	doxygen .\Doxyfile
