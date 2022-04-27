@@ -35,6 +35,7 @@ clean:
 	if exist "build" rd /s /q "build"
 	if exist "bin" rd /s /q "bin"
 	if exist "test\build" rd /s /q "test\build"
+	if exist "docs" rd /s /q "docs"
 
 calc_test.exe: tdd_tests.cpp $(CALCLIB)
 	cmake -G "Unix Makefiles" -S test -B test\build

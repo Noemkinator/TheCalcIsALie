@@ -1,3 +1,8 @@
+/**
+ * @file calc.h
+ * @brief Header file for the calculation functions.
+ */
+
 #ifndef CALC_H_INCLUDED
 #define CALC_H_INCLUDED
 

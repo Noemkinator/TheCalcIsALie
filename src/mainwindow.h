@@ -1,3 +1,8 @@
+/**
+ * @file mainwindow.h
+ * @brief Header file for the calculator window, contains the class definition.
+ */
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 

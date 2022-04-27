@@ -1,3 +1,8 @@
+/**
+ * @file mainwindow.cpp
+ * @brief Main window of the GUI, contains the main window and the functions used.
+ */
+
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 #include "calc.h"
@@ -10,16 +15,25 @@
 double memory = 0;
 /// variable contains currently selected number system
 int numberSystem = 10;
-/// groups containing selected buttons, for easier manipulation and iteration
-QButtonGroup *numberButtons, *numberSystems;
+/// group of number buttons
+QButtonGroup *numberButtons;
+/// group containing number system conversion buttons 
+QButtonGroup *numberSystems;
 
+/// first number in current binary operation
 double firstNum; // prvni cislo binarni operace
+/// variable to indicate that a second number can be entered
 int newNum = 0;  // po stisknuti dalsi cislice vynulovat display
 /// represents the current exponent of a float digit
 int dot = 0;
+/// stores the current operation number
 int myOperator = 0; // pamatuje ktery operator pouzit
 // 0=nic, 1=+, 2=-, 3=*, 4=/, 5=exp, 6=root
 
+/**
+ * GUI constructor
+ * @param parent Parent widget
+ */
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -87,6 +101,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->buttonEq, SIGNAL(released()), this, SLOT(equalClicked()));
 }
 
+/**
+ * GUI destructor
+ */
 MainWindow::~MainWindow()
 {
     delete numberButtons;
@@ -95,7 +112,6 @@ MainWindow::~MainWindow()
 }
 
 /**
- * @brief MainWindow::clear
  * Clear the memory and rewrite the display.
  */
 void MainWindow::clear()
@@ -108,7 +124,6 @@ void MainWindow::clear()
 }
 
 /**
- * @brief MainWindow::numClicked
  * Number button is pressed, add the approptiate digit to the memory.
  */
 void MainWindow::numClicked()
@@ -137,7 +152,6 @@ void MainWindow::numClicked()
 }
 
 /**
- * @brief MainWindow::dotClicked
  * Sets the decimal point and starts to accept fractions.
  */
 void MainWindow::dotClicked()
@@ -149,7 +163,6 @@ void MainWindow::dotClicked()
 }
 
 /**
- * @brief MainWindow::unaryOperationClicked
  * An unary operator is pressed - either the sign button or the factorial.
  */
 void MainWindow::unaryOperationClicked()
@@ -159,13 +172,18 @@ void MainWindow::unaryOperationClicked()
         // vynasob -1 a vypis na display
         memory *= -1;
     } else if (button->text() == "x!") {
-        memory = MathLib::factorial((long)memory);
+        try {
+            memory = MathLib::factorial((long)memory);
+        } catch (const char* msg) {
+            clear();
+            ui->display->setText(msg);
+            return;
+        }
     }
     updateText();
 }
 
 /**
- * @brief MainWindow::binaryOperationClicked
  * A binary operator is pressed - either +, -, *, /, ^, √
  * The first operator is saved, after that it accepts the second operator.
  */
@@ -197,7 +215,6 @@ void MainWindow::binaryOperationClicked()
 }
 
 /**
- * @brief MainWindow::equalClicked
  * The equal button is pressed.
  * Calls the equals() function and resets the selected operator and first number memory.
  */
@@ -209,7 +226,6 @@ void MainWindow::equalClicked()
 }
 
 /**
- * @brief MainWindow::equals
  * Evaluates the currently selected operation, calls the respective library function.
  * After that updated the text with the new value.
  */
@@ -218,38 +234,34 @@ void MainWindow::equals()
     double displayNum;
     QString displayText;
 
-    // vyber operace na vykonani
-    switch (myOperator) {
-    case 0:
-        break;
-    case 1:
-        memory = MathLib::sum(firstNum, memory);
-        break;
-    case 2:
-        memory = MathLib::minus(firstNum, memory);
-        break;
-    case 3:
-        memory = MathLib::multi(firstNum, memory);
-        break;
-    case 4:
-        try {
+    try {
+        // vyber operace na vykonani
+        switch (myOperator) {
+        case 0:
+            break;
+        case 1:
+            memory = MathLib::sum(firstNum, memory);
+            break;
+        case 2:
+            memory = MathLib::minus(firstNum, memory);
+            break;
+        case 3:
+            memory = MathLib::multi(firstNum, memory);
+            break;
+        case 4:
             memory = MathLib::delit(firstNum, memory);
-        } catch (const char* msg) {
-            clear();
-            ui->display->setText(msg);
-            return;
+            break;
+        case 5:
+            memory = MathLib::pow(firstNum, memory);
+            break;
+        case 6:
+            memory = MathLib::root(firstNum, memory);
+            break;
         }
-        break;
-    case 5:
-        firstNum += ui->display->text().toDouble(); //<-- to be replaced
-        displayText = QString::number(firstNum, 'g', 15);
-        ui->display->setText(displayText);
-        break;
-    case 6:
-        firstNum -= ui->display->text().toDouble(); //<-- to be replaced
-        displayText = QString::number(firstNum, 'g', 15);
-        ui->display->setText(displayText);
-        break;
+    } catch (const char* msg) {
+        clear();
+        ui->display->setText(msg);
+        return;
     }
     updateText();
     // pripravit na nove cislo
@@ -257,7 +269,7 @@ void MainWindow::equals()
 }
 
 /**
- * @brief MainWindow::updateText
+ * MainWindow::updateText
  * Function updates the display according to the selected number system.
  */
 void MainWindow::updateText()
@@ -292,7 +304,6 @@ void MainWindow::updateText()
 }
 
 /**
- * @brief MainWindow::makeNumbersVisible
  * Function disables/enables number buttons according to the selected number system.
  */
 void MainWindow::makeNumbersVisible()
@@ -306,7 +317,6 @@ void MainWindow::makeNumbersVisible()
 }
 
 /**
- * @brief MainWindow::changeNumberSystem
  * When the conversion button has been pressed, changes the current number system and rewrites the display.
  */
 void MainWindow::changeNumberSystem()
@@ -336,7 +346,7 @@ void MainWindow::changeNumberSystem()
 }
 
 /**
- * @brief Function parses incoming keyboard events and sends signals to the appropriate buttons.
+ * Function parses incoming keyboard events and sends signals to the appropriate buttons.
  *
  * @param event Incoming keyboard event.
  */

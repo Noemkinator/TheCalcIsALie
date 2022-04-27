@@ -76,7 +76,7 @@ double MathLib::delit(double a, double b)
 long MathLib::factorial(long num)
 {
     if (num < 0) {
-        throw "Can't make factorial of negative";
+        throw "ERR: NEGATIVE NUMBER";
     }
     long x = 1;
     for (long i = 0; i + 1 < num; i++) {
@@ -110,10 +110,10 @@ double MathLib::pow(double x, double y)
 double MathLib::root(double x, double y)
 {
     if (x < 0) {
-        throw "Can't make root of negative";
+        throw "ERR: NEGATIVE NUMBER";
     }
     if (y == 0) {
-        throw "Can't make 0th root\n";
+        throw "ERR: ROOT OF ZERO\n";
     }
     return pow(x, 1 / y);
 }
