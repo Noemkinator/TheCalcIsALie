@@ -16,6 +16,7 @@
 double memory = 0;
 /// variable contains currently selected number system
 int numberSystem = 10;
+
 /// group of number buttons
 QButtonGroup *numberButtons;
 /// group containing number system conversion buttons 
@@ -27,6 +28,8 @@ double firstNum; // prvni cislo binarni operace
 int newNum = 0;  // po stisknuti dalsi cislice vynulovat display
 /// represents the current exponent of a float digit
 int dot = 0;
+/// variable to indicate wether memory contains positive or negative number
+int sign = 0; //0 pozitivni, 1 negativni
 /// stores the current operation number
 int myOperator = 0; // pamatuje ktery operator pouzit
 // 0=nic, 1=+, 2=-, 3=*, 4=/, 5=exp, 6=root
@@ -134,14 +137,24 @@ void MainWindow::numClicked()
         newNum = 0;
         dot = 0;
         memory = 0;
+        sign = 0;
         updateText();
     }
     QPushButton *button = (QPushButton *)sender();
 
     if (dot == 0)
-        memory = memory * numberSystem + numberButtons->id(button);
+        if(sign == 0){
+            memory = memory * numberSystem + numberButtons->id(button);
+        } else {
+             memory = memory * numberSystem - numberButtons->id(button);
+        }
     else {
-        memory += numberButtons->id(button) * pow(numberSystem, (-dot));
+        if(sign == 0){
+            memory += numberButtons->id(button) * pow(numberSystem, (-dot));
+        } else {
+             memory -= numberButtons->id(button) * pow(numberSystem, (-dot));
+        }
+
         dot++;
         // add a zero to the end of the decimal part, do not call updateText()
         if (numberButtons->id(button) == 0) {
@@ -173,6 +186,11 @@ void MainWindow::unaryOperationClicked()
     if (button->text() == "+/-") {
         // vynasob -1 a vypis na display
         memory *= -1;
+        if(memory < 0){
+            sign = 1;
+        } else {
+            sign = 0;
+        }
 
     } else if (button->text() == "x!") {
         try {
