@@ -1014,13 +1014,13 @@ QPushButton:pressed {
     <property name="title">
      <string>Help</string>
     </property>
-    <addaction name="actionAbout"/>
+    <addaction name="actionHelp"/>
    </widget>
    <addaction name="menuHelp"/>
   </widget>
-  <action name="actionAbout">
+  <action name="actionHelp">
    <property name="text">
-    <string>About</string>
+    <string>Open documentation (external PDF)</string>
    </property>
   </action>
  </widget>

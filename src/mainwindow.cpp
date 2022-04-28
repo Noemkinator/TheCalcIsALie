@@ -10,6 +10,7 @@
 #include <QKeyEvent>
 #include <QtMath>
 #include <cmath>
+#include <QDesktopServices>
 
 /// variable contains current value, to be written on display
 double memory = 0;
@@ -99,6 +100,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->buttonDot, SIGNAL(released()), this, SLOT(dotClicked()));
     connect(ui->buttonCE, SIGNAL(released()), this, SLOT(clear()));
     connect(ui->buttonEq, SIGNAL(released()), this, SLOT(equalClicked()));
+    connect(ui->actionHelp, SIGNAL(triggered()), this, SLOT(openHelp()));
 }
 
 /**
@@ -463,4 +465,9 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         }
         break;
     }
+}
+
+void MainWindow::openHelp()
+{
+    QDesktopServices::openUrl(QUrl("file:///" + QApplication::applicationDirPath() + "/dokumentace.pdf"));
 }
