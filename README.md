@@ -1,15 +1,26 @@
 # TheCalcIsALie
 
-A project involving a GUI calculator and a simple math library.
+A project involving a GUI calculator and a simple math library.  
+![Calculator photo](screenshot.png)
 
 Usage
 ---------
-Please see the attached guide in file: [dokumentace.pdf](dokumentace.pdf).
+* Enter numbers using your keyboard or using the buttons in the UI.
+* Choose an operation with the respective buttons or keyboard keys.
+* Choose an operations second operand, if it requires.
+* Press equals to show the result, or press another operation button to chain calculations.
+* Change the shown number system using the four conversion buttons located at the top.
+* The +/- button changes the sign of currently displayed value.
+* Help menu contains the PDF documentation guide.
+
+For further instructions please see the attached guide in file: [dokumentace.pdf](dokumentace.pdf).
 
 Installing
 ---------
-Download the latest release at: https://github.com/Noemkinator/TheCalcIsALie/releases.  
-Next...
+Download the latest release at: https://github.com/Noemkinator/TheCalcIsALie/releases/latest.  
+Next run the downloaded installer and follow the shown instructions.  
+Select the installation directory and continue to install.  
+The installed calculator will be located in the Start menu, you can choose to add a desktop icon during the installation.
 
 Build requirements (Windows):
 ---------
