@@ -1,4 +1,5 @@
 # Makefile needs to be run within a Qt MinGW shell to correctly set the PATH enviromental variable
+SHELL=cmd
 CXX=g++
 CPPFLAGS=-g -O2
 CALCLIB=$(wildcard calc.*)
@@ -15,8 +16,8 @@ bin\TheCalcIsALie.exe: $(CALCSOURCES)
 	cmake -G "Unix Makefiles" -S . -B build
 	cd build && make
 	if not exist "bin" mkdir bin
-	copy .\build\TheCalcIsALie.exe .\bin\TheCalcIsALie.exe
-	windeployqt bin\TheCalcIsALie.exe
+	cmd /C move build\TheCalcIsALie.exe bin
+	windeployqt $@
 
 stddev.exe: profiling.o calc.o
 	$(CXX) $(CPPFLAGS) -o $@ $^
@@ -40,7 +41,7 @@ clean:
 calc_test.exe: tdd_tests.cpp $(CALCLIB)
 	cmake -G "Unix Makefiles" -S test -B test\build
 	cd test\build && make
-	copy .\test\build\calc_test.exe .
+	cmd /C move .\test\build\$@
 
 test: calc_test.exe
 	$<
