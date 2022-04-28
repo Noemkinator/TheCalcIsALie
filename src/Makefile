@@ -7,10 +7,10 @@ CALCSOURCES=$(wildcard *.cpp *.h *.ui)
 BIN = bin\TheCalcIsALie.exe stddev.exe
 .PHONY: all pack run clean test doc
 
+all: $(BIN)
+
 %.o: %.cpp %.h
 	$(CXX) -c $(CPPFLAGS) $< -o $@
-
-all: $(BIN)
 
 bin\TheCalcIsALie.exe: $(CALCSOURCES)
 	cmake -G "Unix Makefiles" -S . -B build
@@ -27,7 +27,7 @@ stddev.exe: profiling.o calc.o
 pack: xzajic22_xsocha02_xtrutn00_xpuchn02.zip
 
 xzajic22_xsocha02_xtrutn00_xpuchn02.zip:
-	zip -j $@ *.cpp *.h *.ui CMakeLists.txt Makefile Doxyfile ..\hodnoceni.txt ..\dokumentace.pdf ..\odevzdani.txt
+	zip -j $@ *.cpp *.h *.ui *.rc *.ico CMakeLists.txt Makefile Doxyfile ..\hodnoceni.txt ..\dokumentace.pdf ..\odevzdani.txt
 	zip $@ test\CMakeLists.txt
 
 run: bin\TheCalcIsALie.exe
