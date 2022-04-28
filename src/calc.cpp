@@ -70,8 +70,9 @@ long MathLib::factorial(double num)
         throw "ERR: INVALID FACTORIAL";
     }
     long x = 1;
-    for (long i = 0; i + 1 < num; i++) {
-        x *= (num - i);
+    for (int i = 2;i <= num;i++){
+        x*= num + i;
+        x/=i;
     }
     return x;
 }
