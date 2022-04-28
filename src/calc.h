@@ -12,7 +12,7 @@ namespace MathLib {
     double multi(double a, double b);
     double delit(double a, double b);
 
-    long factorial(double num);
+    double factorial(double num);
     double pow(double x, double y);
     double root(double x, double y);
 } // namespace MathLib

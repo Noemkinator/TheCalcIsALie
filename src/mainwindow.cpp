@@ -144,13 +144,13 @@ void MainWindow::numClicked()
     QPushButton *button = (QPushButton *)sender();
 
     if (dot == 0)
-        if(sign == 0){
+        if (sign == 0) {
             memory = memory * numberSystem + numberButtons->id(button);
         } else {
              memory = memory * numberSystem - numberButtons->id(button);
         }
     else {
-        if(sign == 0){
+        if (sign == 0) {
             memory += numberButtons->id(button) * pow(numberSystem, (-dot));
         } else {
              memory -= numberButtons->id(button) * pow(numberSystem, (-dot));
@@ -187,7 +187,7 @@ void MainWindow::unaryOperationClicked()
     if (button->text() == "+/-") {
         // vynasob -1 a vypis na display
         memory *= -1;
-        if(memory < 0){
+        if (memory < 0) {
             sign = 1;
         } else {
             sign = 0;
@@ -298,33 +298,47 @@ void MainWindow::equals()
  */
 void MainWindow::updateText()
 {
+    QString displayText;
+    int exp = 0;
     // variables store the integer and fraction part of the memory
     double intPart = 0, fractPart = 0;
     // define the selected precision digits
-    int fractPrecision = 15;
+    int precision = 15;
     // separate the memory into integer part and fraction part
     fractPart = std::modf(memory, &intPart);
     fractPart = std::abs(fractPart);
 
     if (numberSystem == 10) {
-        ui->display->setText(QString::number(memory, 'g', fractPrecision));
+        displayText = QString::number(memory, 'g', precision);
     } else {
+        // if number is larger then system^precision
+        if (memory > qPow(numberSystem, precision)) {
+            exp = qLn(memory) / qLn(numberSystem);
+            double tmp = memory / qPow(numberSystem, exp);
+            fractPart = std::modf(tmp, &intPart);
+            fractPart = std::abs(fractPart);
+        }
         // cast to long to select the correct function
-        ui->display->setText(QString::number((long)intPart, numberSystem).toUpper());
+        displayText = QString::number((long)intPart, numberSystem).toUpper();
         // if fraction part is larger then selected precision
-        if ((fractPart * qPow(numberSystem, fractPrecision)) >= 1) {
+        if ((fractPart * qPow(numberSystem, precision)) >= 1) {
             // add dot character
-            ui->display->setText(ui->display->text() + ".");
+            displayText = displayText + ".";
             // calculate the fraction digits and write them to display
-            for (int i = 0; i < fractPrecision; ++i) {
+            for (int i = 0; i < precision; ++i) {
                 fractPart *= numberSystem;
-                ui->display->setText(ui->display->text() + QString::number((long)fractPart, numberSystem).toUpper());
+                displayText = displayText + QString::number((long)fractPart, numberSystem).toUpper();
                 fractPart -= (long)fractPart;
                 if (fractPart <= std::numeric_limits<double>::epsilon())
                     break;
             }
         }
+        // print the exponential notation
+        if (exp) {
+            displayText = displayText + "x" + QString::number(numberSystem) + "^" + QString::number(exp);
     }
+    }
+    ui->display->setText(displayText);
 }
 
 /**

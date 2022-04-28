@@ -64,15 +64,19 @@ double MathLib::delit(double a, double b)
  * @param num Base for factorial
  * @date 4/28/2022
  */
-long MathLib::factorial(double num)
+double MathLib::factorial(double num)
 {
-    if (num < 0 || std::abs(num - int(num)) > 0.0000001) {
+    if (num < 0 || std::abs(num - int(num)) > 0) {
         throw "ERR: INVALID FACTORIAL";
     }
-    long x = 1;
-    for (int i = 2;i <= num;i++){
-        x*= num + i;
-        x/=i;
+    double x = 1;
+    double tmp;
+    for (long i = 0; i + 1 < num; i++) {
+        tmp = x;
+        x *= (num - i);
+        if ((num - i) != 0 && (x / (num - i) != tmp)) {
+            throw "ERR: DOUBLE OVERFLOW";
+        }
     }
     return x;
 }
@@ -88,7 +92,7 @@ long MathLib::factorial(double num)
  */
 double MathLib::pow(double x, double y)
 {
-    if (y < 0 || std::abs(y - int(y)) > 0.0000001)
+    if (y < 0 || std::abs(y - int(y)) > 0)
         throw "ERR: NON-NATURAL EXPONENT";
     else
         return std::pow(x, y);
@@ -109,7 +113,7 @@ double MathLib::root(double x, double y)
         throw "ERR: CANNOT CALCULATE ZEROTH ROOT";
     } else if (x < 0) {
         // if radicand has a decimal part or is even, throw an error
-        if (std::abs(y - int(y)) > 0.0000001 || (int(y) % 2 == 0))
+        if (std::abs(y - int(y)) > 0 || (int(y) % 2 == 0))
             throw "ERR: INVALID ROOT";
         else
             // odd nth root of negative number is same as odd nth root of positive number * -1

@@ -79,7 +79,7 @@ TEST(Calc, Root)
     EXPECT_ANY_THROW(MathLib::root(0, 0));
     EXPECT_ANY_THROW(MathLib::root(-9, 4));
 }
-TEST(Calc, Factrial)
+TEST(Calc, Factorial)
 {
     // valid function calls
     EXPECT_DOUBLE_EQ(MathLib::factorial(0), 1);
