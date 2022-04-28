@@ -207,7 +207,7 @@ void MainWindow::binaryOperationClicked()
         myOperator = 4;
     } else if (button->objectName() == "buttonExp") {
         myOperator = 5;
-    } else if (button->objectName() == "buttonSqrt") {
+    } else if (button->objectName() == "buttonRoot") {
         myOperator = 6;
     }
     // pripravit na nove cislo
