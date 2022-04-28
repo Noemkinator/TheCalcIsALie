@@ -173,6 +173,7 @@ void MainWindow::unaryOperationClicked()
     if (button->text() == "+/-") {
         // vynasob -1 a vypis na display
         memory *= -1;
+
     } else if (button->text() == "x!") {
         try {
             memory = MathLib::factorial((long)memory);
@@ -181,6 +182,8 @@ void MainWindow::unaryOperationClicked()
             ui->display->setText(msg);
             return;
         }
+
+        newNum = 1;
     }
     updateText();
 }
