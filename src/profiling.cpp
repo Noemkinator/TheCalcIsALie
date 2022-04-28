@@ -4,7 +4,7 @@
  * @author Jan Zajicek, xzajic22
  * @date 4/28/2022
  */
-#include "calc.h"
+#include "calc.cpp"
 #include <cmath>
 #include <iostream>
 #include <vector>
@@ -30,12 +30,12 @@ ld average(std::vector<ld> x, ld N)
 /**
  * @brief Function for calculating standard deviation of values in stdin. 
  */
-int main(int argc, char* argv[])
+int main()
 {
     std::vector<ld> x;
     long N = 0;
     ld input;
-    for (N; std::cin >> input; N++) {
+    for (; std::cin >> input; N++) {
         x.push_back(input);
     }
     ld avg = average(x, N);
