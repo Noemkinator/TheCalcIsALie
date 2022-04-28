@@ -32,6 +32,7 @@ private slots:
     void makeNumbersVisible();
     void changeNumberSystem();
     void keyPressEvent(QKeyEvent * event);
+    void openHelp();
 
 private:
     Ui::MainWindow *ui;

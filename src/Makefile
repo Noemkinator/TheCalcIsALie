@@ -18,6 +18,8 @@ bin\TheCalcIsALie.exe: $(CALCSOURCES)
 	if not exist "bin" mkdir bin
 	cmd /C move build\TheCalcIsALie.exe bin
 	windeployqt $@
+	if exist "..\dokumentace.pdf" copy "..\dokumentace.pdf" bin
+	if exist "dokumentace.pdf" copy "dokumentace.pdf" bin
 
 stddev.exe: profiling.o calc.o
 	$(CXX) $(CPPFLAGS) -o $@ $^
