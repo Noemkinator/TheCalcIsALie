@@ -1,0 +1,25 @@
+Stanovené termíny pro práci v týmu :
+	do 27.3.2022 vytvoření testů pro TDD
+	do  3.4.2022 implementace funkcí 
+	do 10.4.2022 konečná podoba GUI
+	do 17.4.2022 dokumentace k produktu
+	do 24.4.2022 tvorba profilingu
+	do 28.4.2022 dokončení instalačního balíčku a odevzdání (29.4.2022 7:00)
+
+Přidělení úkolů :
+	xzajic22 - příručka produktu, profiling
+	xsocha02 - makefile, funkce pro převody mezi č.soustavami
+	xtrutn00 - TDD testy, implementace GUI
+	xpuchn02 - instalace, funkce pro výpočty matematických operací
+	
+	Všichni členové navrhují jakým způsobem se bude pokračovat, 
+	hlavní realizaci se provádí podle rozpisu úkolů.
+
+Komunikační kanály :
+	Discord server https://discord.gg/Pb6Q5M5tX9
+	Každý člen má zároveň uloženo telefonní číslo zbytku týmu.
+
+Systém pro správu verzí :
+	GIT, hosting na github.com
+	https://github.com/Noemkinator/TheCalcIsALie
+	účet ivskontrola má oprávnění nahlížet do repozitáře.
