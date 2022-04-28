@@ -7,21 +7,22 @@
 #include "calc.h"
 #include <cmath>
 #include <iostream>
+#include <vector>
 
 /// typedef for used variable type
 typedef long double ld;
 
 /**
  * @brief Function for calculating average of array N elements
- * @param x array of numbers
+ * @param x vector of numbers
  * @param N size of array
  * @return average of array
  */
-ld average(ld* x, ld N)
+ld average(std::vector<ld> x, ld N)
 {
     ld avg = 0;
-    for (long i = 0; i < N; i++) {
-        avg = MathLib::sum(avg, x[i]);
+    for (auto i : x) {
+        avg = MathLib::sum(avg, i);
     }
     return MathLib::delit(avg, N);
 }
@@ -31,16 +32,16 @@ ld average(ld* x, ld N)
  */
 int main(int argc, char* argv[])
 {
-    ld x[4096];
+    std::vector<ld> x;
     long N = 0;
     ld input;
     for (N; std::cin >> input; N++) {
-        x[N] = input;
+        x.push_back(input);
     }
-    ld avg = average((ld*)x, N);
+    ld avg = average(x, N);
     ld summ = 0;
-    for (long i = 0; i < N; i++) {
-        summ = MathLib::sum(MathLib::pow(MathLib::minus(x[i], avg), 2), summ);
+    for (auto i : x) {
+        summ = MathLib::sum(MathLib::pow(MathLib::minus(i, avg), 2), summ);
     }
     ld s = MathLib::multi(MathLib::delit(1, N - 1), summ);
     ld stddev = MathLib::root(s, 2);
