@@ -116,7 +116,7 @@ double MathLib::root(double x, double y)
 
     double tmp;
     if (y == 0) {
-        throw "ERR: CANNOT CALCULATE ZEROTH ROOT";
+        throw "ERR: RADICAND IS ZERO";
     } else if (x < 0) {
         // if radicand has a decimal part or is even, throw an error
         if (std::abs(y - int(y)) > 0 || (int(y) % 2 == 0))
