@@ -20,10 +20,7 @@
  * @param b Summand/addend
  * @date 4/28/2022
  */
-double MathLib::sum(double a, double b)
-{
-    return a + b;
-}
+double MathLib::sum(double a, double b) { return a + b; }
 
 /**
  * This function subtracts given numbers
@@ -32,10 +29,7 @@ double MathLib::sum(double a, double b)
  * @param b Subtrahend
  * @date 4/28/2022
  */
-double MathLib::minus(double a, double b)
-{
-    return a - b;
-}
+double MathLib::minus(double a, double b) { return a - b; }
 
 /**
  * This function multiplies given numbers
@@ -44,10 +38,7 @@ double MathLib::minus(double a, double b)
  * @param b Multiplicand
  * @date 4/28/2022
  */
-double MathLib::multi(double a, double b)
-{
-    return a * b;
-}
+double MathLib::multi(double a, double b) { return a * b; }
 
 /**
  * This function divides given numbers and checks
@@ -73,10 +64,10 @@ double MathLib::delit(double a, double b)
  * @param num Base for factorial
  * @date 4/28/2022
  */
-long MathLib::factorial(long num)
+long MathLib::factorial(double num)
 {
-    if (num < 0) {
-        throw "ERR: NEGATIVE NUMBER";
+    if (num < 0 || std::abs(num - int(num)) > 0.0000001) {
+        throw "ERR: INVALID FACTORIAL";
     }
     long x = 1;
     for (long i = 0; i + 1 < num; i++) {
@@ -94,9 +85,12 @@ long MathLib::factorial(long num)
  * param y Exponent
  * date 4/28/2022
  */
-double MathLib::pow(double x, double y) 
+double MathLib::pow(double x, double y)
 {
-    return std::pow(x,y);
+    if (y < 0 || std::abs(y - int(y)) > 0.0000001)
+        throw "ERR: NON-NATURAL EXPONENT";
+    else
+        return std::pow(x, y);
 }
 
 /**
@@ -109,11 +103,16 @@ double MathLib::pow(double x, double y)
  */
 double MathLib::root(double x, double y)
 {
-    if (x < 0) {
-        throw "ERR: NEGATIVE NUMBER";
-    }
+
     if (y == 0) {
-        throw "ERR: ROOT OF ZERO\n";
-    }
-    return pow(x, 1 / y);
+        throw "ERR: CANNOT CALCULATE ZEROTH ROOT";
+    } else if (x < 0) {
+        // if radicand has a decimal part or is even, throw an error
+        if (std::abs(y - int(y)) > 0.0000001 || (int(y) % 2 == 0))
+            throw "ERR: INVALID ROOT";
+        else
+            // odd nth root of negative number is same as odd nth root of positive number * -1
+            return -1.0 * std::pow(-x, 1.0 / y);
+    } else
+        return std::pow(x, 1.0 / y);
 }
