@@ -124,6 +124,7 @@ void MainWindow::clear()
     newNum = 0;
     dot = 0;
     memory = 0;
+    sign = 0;
     myOperator = 0;
     updateText();
 }
