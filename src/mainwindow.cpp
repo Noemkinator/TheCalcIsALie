@@ -195,7 +195,7 @@ void MainWindow::unaryOperationClicked()
 
     } else if (button->text() == "x!") {
         try {
-            memory = MathLib::factorial((long)memory);
+            memory = MathLib::factorial(memory);
         } catch (const char* msg) {
             clear();
             ui->display->setText(msg);

@@ -74,7 +74,7 @@ double MathLib::factorial(double num)
     for (long i = 0; i + 1 < num; i++) {
         tmp = x;
         x *= (num - i);
-        if ((num - i) != 0 && (x / (num - i) != tmp)) {
+        if (x / (num - i) != tmp) {
             throw "ERR: DOUBLE OVERFLOW";
         }
     }
@@ -94,8 +94,13 @@ double MathLib::pow(double x, double y)
 {
     if (y < 0 || std::abs(y - int(y)) > 0)
         throw "ERR: NON-NATURAL EXPONENT";
-    else
-        return std::pow(x, y);
+
+    double tmp = std::pow(x, y);
+
+    if (tmp == HUGE_VAL || tmp == -HUGE_VAL)
+        throw "ERR: DOUBLE OVERFLOW";
+
+    return tmp;
 }
 
 /**
@@ -109,6 +114,7 @@ double MathLib::pow(double x, double y)
 double MathLib::root(double x, double y)
 {
 
+    double tmp;
     if (y == 0) {
         throw "ERR: CANNOT CALCULATE ZEROTH ROOT";
     } else if (x < 0) {
@@ -117,7 +123,12 @@ double MathLib::root(double x, double y)
             throw "ERR: INVALID ROOT";
         else
             // odd nth root of negative number is same as odd nth root of positive number * -1
-            return -1.0 * std::pow(-x, 1.0 / y);
+            tmp = -1.0 * std::pow(-x, 1.0 / y);
     } else
-        return std::pow(x, 1.0 / y);
+        tmp = std::pow(x, 1.0 / y);
+
+    if (tmp == HUGE_VAL || tmp == -HUGE_VAL)
+        throw "ERR: DOUBLE OVERFLOW";
+
+    return tmp;
 }
