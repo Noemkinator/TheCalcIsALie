@@ -209,7 +209,7 @@ void MainWindow::unaryOperationClicked()
 }
 
 /**
- * A binary operator is pressed - either +, -, *, /, ^, √
+ * A binary operator is pressed - either +, -, *, /, ^, root
  * The first operator is saved, after that it accepts the second operator.
  */
 void MainWindow::binaryOperationClicked()
@@ -504,4 +504,10 @@ void MainWindow::keyPressEvent(QKeyEvent* event)
     }
 }
 
-void MainWindow::openHelp() { QDesktopServices::openUrl(QUrl("file:///" + QApplication::applicationDirPath() + "/dokumentace.pdf")); }
+/**
+ * Function opens the locally saved documentation file.
+ */
+void MainWindow::openHelp() 
+{ 
+    QDesktopServices::openUrl(QUrl("file:///" + QApplication::applicationDirPath() + "/dokumentace.pdf")); 
+}
