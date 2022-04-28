@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 
 project(CALC_TEST)
+set(CMAKE_BUILD_TYPE Release)
 
 include(FetchContent)
 FetchContent_Declare(

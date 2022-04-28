@@ -2,7 +2,9 @@ cmake_minimum_required(VERSION 3.5)
 
 project(TheCalcIsALie VERSION 0.1 LANGUAGES CXX)
 
-set(CMAKE_EXPORT_COMPILE_COMMANDS 1 ) 
+set(CMAKE_EXPORT_COMPILE_COMMANDS 1 )
+set(CMAKE_BUILD_TYPE Release)
+set(APP_ICON_RESOURCE_WINDOWS "${CMAKE_CURRENT_SOURCE_DIR}/Resource.rc")
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -29,6 +31,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(TheCalcIsALie
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+        ${APP_ICON_RESOURCE_WINDOWS}
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET gui3 APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
