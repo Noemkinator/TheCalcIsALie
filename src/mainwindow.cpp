@@ -7,10 +7,10 @@
 #include "./ui_mainwindow.h"
 #include "calc.h"
 #include <QButtonGroup>
+#include <QDesktopServices>
 #include <QKeyEvent>
 #include <QtMath>
 #include <cmath>
-#include <QDesktopServices>
 
 /// variable contains current value, to be written on display
 double memory = 0;
@@ -18,18 +18,18 @@ double memory = 0;
 int numberSystem = 10;
 
 /// group of number buttons
-QButtonGroup *numberButtons;
-/// group containing number system conversion buttons 
-QButtonGroup *numberSystems;
+QButtonGroup* numberButtons;
+/// group containing number system conversion buttons
+QButtonGroup* numberSystems;
 
 /// first number in current binary operation
 double firstNum; // prvni cislo binarni operace
 /// variable to indicate that a second number can be entered
-int newNum = 0;  // po stisknuti dalsi cislice vynulovat display
+int newNum = 0; // po stisknuti dalsi cislice vynulovat display
 /// represents the current exponent of a float digit
 int dot = 0;
 /// variable to indicate wether memory contains positive or negative number
-int sign = 0; //0 pozitivni, 1 negativni
+int sign = 0; // 0 pozitivni, 1 negativni
 /// stores the current operation number
 int myOperator = 0; // pamatuje ktery operator pouzit
 // 0=nic, 1=+, 2=-, 3=*, 4=/, 5=exp, 6=root
@@ -38,8 +38,9 @@ int myOperator = 0; // pamatuje ktery operator pouzit
  * GUI constructor
  * @param parent Parent widget
  */
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), ui(new Ui::MainWindow)
+MainWindow::MainWindow(QWidget* parent)
+    : QMainWindow(parent)
+    , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     // prevent window resizing
@@ -141,19 +142,19 @@ void MainWindow::numClicked()
         sign = 0;
         updateText();
     }
-    QPushButton *button = (QPushButton *)sender();
+    QPushButton* button = (QPushButton*)sender();
 
     if (dot == 0)
         if (sign == 0) {
             memory = memory * numberSystem + numberButtons->id(button);
         } else {
-             memory = memory * numberSystem - numberButtons->id(button);
+            memory = memory * numberSystem - numberButtons->id(button);
         }
     else {
         if (sign == 0) {
             memory += numberButtons->id(button) * pow(numberSystem, (-dot));
         } else {
-             memory -= numberButtons->id(button) * pow(numberSystem, (-dot));
+            memory -= numberButtons->id(button) * pow(numberSystem, (-dot));
         }
 
         dot++;
@@ -183,7 +184,7 @@ void MainWindow::dotClicked()
  */
 void MainWindow::unaryOperationClicked()
 {
-    QPushButton *button = (QPushButton *)sender();
+    QPushButton* button = (QPushButton*)sender();
     if (button->text() == "+/-") {
         // vynasob -1 a vypis na display
         memory *= -1;
@@ -213,7 +214,7 @@ void MainWindow::unaryOperationClicked()
  */
 void MainWindow::binaryOperationClicked()
 {
-    QPushButton *button = (QPushButton *)sender();
+    QPushButton* button = (QPushButton*)sender();
     // podivej, jestli je tohle prvni stisk tlacitka operace popr. vyhodnot jiz zadanou operaci
     if (myOperator != 0) {
         MainWindow::equals();
@@ -336,7 +337,7 @@ void MainWindow::updateText()
         // print the exponential notation
         if (exp) {
             displayText = displayText + "x" + QString::number(numberSystem) + "^" + QString::number(exp);
-    }
+        }
     }
     ui->display->setText(displayText);
 }
@@ -359,7 +360,7 @@ void MainWindow::makeNumbersVisible()
  */
 void MainWindow::changeNumberSystem()
 {
-    QPushButton *button = (QPushButton *)sender();
+    QPushButton* button = (QPushButton*)sender();
     // change the current number system
     numberSystem = numberSystems->id(button);
 
@@ -388,7 +389,7 @@ void MainWindow::changeNumberSystem()
  *
  * @param event Incoming keyboard event.
  */
-void MainWindow::keyPressEvent(QKeyEvent *event)
+void MainWindow::keyPressEvent(QKeyEvent* event)
 {
     switch (event->key()) {
     case Qt::Key_1:
@@ -503,7 +504,4 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     }
 }
 
-void MainWindow::openHelp()
-{
-    QDesktopServices::openUrl(QUrl("file:///" + QApplication::applicationDirPath() + "/dokumentace.pdf"));
-}
+void MainWindow::openHelp() { QDesktopServices::openUrl(QUrl("file:///" + QApplication::applicationDirPath() + "/dokumentace.pdf")); }

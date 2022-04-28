@@ -13,14 +13,12 @@ TEST(Calc, Add)
     // valid function calls
     EXPECT_DOUBLE_EQ(MathLib::sum(4356, -8765), -4409);
     EXPECT_DOUBLE_EQ(MathLib::sum(-42.756, -34.11), -76.866);
-
 }
 TEST(Calc, Sub)
 {
     // valid function calls
     EXPECT_DOUBLE_EQ(MathLib::minus(4356, 1765), 2591);
     EXPECT_DOUBLE_EQ(MathLib::minus(-42.756, 34.11), -76.866);
-
 }
 TEST(Calc, Mul)
 {
@@ -28,7 +26,6 @@ TEST(Calc, Mul)
     EXPECT_DOUBLE_EQ(MathLib::multi(4356.784, -8765), -38187211.76);
     EXPECT_DOUBLE_EQ(MathLib::multi(-42.756, -34.11), 1458.40716);
     EXPECT_DOUBLE_EQ(MathLib::multi(0, -34.11), 0);
-
 }
 TEST(Calc, Div)
 {
