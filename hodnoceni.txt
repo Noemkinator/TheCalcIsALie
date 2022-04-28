@@ -1,4 +1,4 @@
-xlogin01 100 (základ GUI a základní mat. operace)
-xlogin02 100 (pokročilé mat. operace)
-xlogin03 90 (profiling, instalátor)
-xlogin04 110 (testy, dokumentace)
+xzajic22 95 (příručka produktu, profiling, dokumentace)
+xsocha02 115 (makefile, funkce pro převody mezi č.soustavami, pomoc s GUI)
+xtrutn00 95 (TDD testy, implementace GUI)
+xpuchn02 95 (instalace, funkce pro výpočty matematických operací)
