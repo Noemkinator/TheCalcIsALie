@@ -1,1 +1,8 @@
-tento soubor bude obsahovat rozdil mezi planem projektu a skutecnosti
+První polovina termínů dodržena, druhá rozvolněna.
+úkoly:
+Jan Zajíček- k přidělenému si vzal dokumentaci
+Jakub Socha- k přidělenému pomáhal nejen s GUI
+Veronika Trutnovská- podle přidělených
+Ivo Puchnar- podle přidělených
+Komunikace probíhala přes Discord, telefony nebyli využity.
+Správa verzí probíhala dle plánu.
