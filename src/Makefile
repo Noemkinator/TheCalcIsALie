@@ -50,4 +50,4 @@ test: calc_test.exe
 
 # may not work on Windows based systems - Doxygen needs to be installed
 doc:
-	doxygen .\Doxyfile
+	doxygen Doxyfile

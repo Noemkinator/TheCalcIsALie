@@ -7,8 +7,16 @@
 #include "calc.h"
 #include <cmath>
 #include <iostream>
+
+/// typedef for used variable type
 typedef long double ld;
 
+/**
+ * @brief Function for calculating average of array N elements
+ * @param x array of numbers
+ * @param N size of array
+ * @return average of array
+ */
 ld average(ld* x, ld N)
 {
     ld avg = 0;
@@ -17,6 +25,10 @@ ld average(ld* x, ld N)
     }
     return MathLib::delit(avg, N);
 }
+
+/**
+ * @brief Function for calculating standard deviation of values in stdin. 
+ */
 int main(int argc, char* argv[])
 {
     ld x[4096];
