@@ -1,0 +1,3 @@
+29.04.2022 4:00
+celý archiv je odevzdán na serveru ivs.fit.vutbr.cz/ivs-proj2/odevzdane/xzajic22
+pomocí git clone
